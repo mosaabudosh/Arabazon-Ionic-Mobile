@@ -1,0 +1,249 @@
+
+<ion-content [fullscreen]="true" class="register-content">
+
+  <main class="register-page" dir="rtl">
+
+    <!-- Brand -->
+    <header class="brand-header">
+      <div class="brand-mark">A</div>
+
+      <div class="brand-info">
+        <h2>ARABAZON</h2>
+        <span>Multi Vendor Marketplace</span>
+      </div>
+    </header>
+
+    <div class="brand-divider"></div>
+
+    <!-- Welcome -->
+    <section class="welcome-section">
+      <span class="welcome-label">انضم إلى ARABAZON</span>
+      <h1>أنشئ حسابك الآن</h1>
+      <p>اكتشف عالمًا من المتاجر والمنتجات في مكان واحد.</p>
+    </section>
+
+    <!-- Register Form -->
+    <section class="register-card">
+
+      <div class="card-heading">
+        <h2>إنشاء حساب جديد</h2>
+        <p>أدخل بياناتك للبدء</p>
+      </div>
+
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="onSubmit()"
+        novalidate>
+
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="fullName">الاسم الكامل</label>
+
+          <ion-item class="input-item" lines="none">
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+
+            <ion-input
+              id="fullName"
+              type="text"
+              formControlName="fullName"
+              placeholder="أدخل اسمك الكامل"
+              autocomplete="name">
+            </ion-input>
+          </ion-item>
+
+          <small class="error-message"
+            *ngIf="registerForm.get('fullName')?.touched &&
+                   registerForm.get('fullName')?.hasError('required')">
+            الاسم الكامل مطلوب
+          </small>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">البريد الإلكتروني</label>
+
+          <ion-item class="input-item" lines="none">
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+
+            <ion-input
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="example@email.com"
+              autocomplete="email">
+            </ion-input>
+          </ion-item>
+
+          <small class="error-message"
+            *ngIf="registerForm.get('email')?.touched &&
+                   registerForm.get('email')?.hasError('required')">
+            البريد الإلكتروني مطلوب
+          </small>
+
+          <small class="error-message"
+            *ngIf="registerForm.get('email')?.touched &&
+                   registerForm.get('email')?.hasError('email')">
+            البريد الإلكتروني غير صالح
+          </small>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label for="phone">رقم الهاتف</label>
+
+          <ion-item class="input-item" lines="none">
+            <ion-icon name="call-outline" slot="start"></ion-icon>
+
+            <ion-input
+              id="phone"
+              type="tel"
+              formControlName="phone"
+              placeholder="أدخل رقم الهاتف"
+              autocomplete="tel">
+            </ion-input>
+          </ion-item>
+
+          <small class="error-message"
+            *ngIf="registerForm.get('phone')?.touched &&
+                   registerForm.get('phone')?.hasError('required')">
+            رقم الهاتف مطلوب
+          </small>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">كلمة المرور</label>
+
+          <ion-item class="input-item" lines="none">
+            <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+
+            <ion-input
+              id="password"
+              [type]="passwordVisible ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="أدخل كلمة المرور"
+              autocomplete="new-password">
+            </ion-input>
+
+            <ion-button
+              fill="clear"
+              type="button"
+              slot="end"
+              class="password-toggle"
+              (click)="passwordVisible = !passwordVisible">
+
+              <ion-icon
+                [name]="passwordVisible ? 'eye-off-outline' : 'eye-outline'">
+              </ion-icon>
+
+            </ion-button>
+          </ion-item>
+
+          <small class="error-message"
+            *ngIf="registerForm.get('password')?.touched &&
+                   registerForm.get('password')?.hasError('required')">
+            كلمة المرور مطلوبة
+          </small>
+
+          <small class="error-message"
+            *ngIf="registerForm.get('password')?.touched &&
+                   registerForm.get('password')?.hasError('minlength')">
+            يجب ألا تقل كلمة المرور عن 8 أحرف
+          </small>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="confirmPassword">تأكيد كلمة المرور</label>
+
+          <ion-item class="input-item" lines="none">
+            <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+
+            <ion-input
+              id="confirmPassword"
+              [type]="confirmPasswordVisible ? 'text' : 'password'"
+              formControlName="confirmPassword"
+              placeholder="أعد إدخال كلمة المرور"
+              autocomplete="new-password">
+            </ion-input>
+
+            <ion-button
+              fill="clear"
+              type="button"
+              slot="end"
+              class="password-toggle"
+              (click)="confirmPasswordVisible = !confirmPasswordVisible">
+
+              <ion-icon
+                [name]="confirmPasswordVisible ? 'eye-off-outline' : 'eye-outline'">
+              </ion-icon>
+
+            </ion-button>
+          </ion-item>
+
+          <small class="error-message"
+            *ngIf="registerForm.get('confirmPassword')?.touched &&
+                   registerForm.hasError('passwordMismatch')">
+            كلمتا المرور غير متطابقتين
+          </small>
+        </div>
+
+        <!-- Terms -->
+        <div class="terms-option">
+          <input
+            id="agreeTerms"
+            type="checkbox"
+            formControlName="agreeTerms">
+
+          <label for="agreeTerms">
+            أوافق على الشروط والأحكام وسياسة الخصوصية
+          </label>
+        </div>
+
+        <small class="error-message"
+          *ngIf="registerForm.get('agreeTerms')?.touched &&
+                 registerForm.get('agreeTerms')?.hasError('required')">
+          يجب الموافقة على الشروط والأحكام
+        </small>
+
+        <!-- Submit -->
+        <ion-button
+          expand="block"
+          type="submit"
+          class="register-button"
+          [disabled]="registerForm.invalid">
+
+          إنشاء الحساب
+
+          <ion-icon
+            slot="start"
+            name="arrow-forward-outline">
+          </ion-icon>
+        </ion-button>
+
+      </form>
+
+      <!-- Login Navigation -->
+      <div class="login-navigation">
+        <span>لديك حساب بالفعل؟</span>
+
+        <button
+          type="button"
+          class="login-link"
+          (click)="goToLogin()">
+          تسجيل الدخول
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="register-footer">
+      <div class="footer-line"></div>
+      <p>ARABAZON</p>
+      <span>Multi Vendor Marketplace</span>
+    </footer>
+
+  </main>
+
+</ion-content>

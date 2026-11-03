@@ -1,0 +1,147 @@
+<ion-content [fullscreen]="true" class="login-content">
+
+  <main class="login-page" dir="rtl">
+
+    <!-- Brand -->
+    <header class="brand-header">
+      <div class="brand-mark">A</div>
+
+      <div class="brand-info">
+        <h2>ARABAZON</h2>
+        <span>Multi Vendor Marketplace</span>
+      </div>
+    </header>
+
+    <div class="brand-divider"></div>
+
+    <!-- Welcome -->
+    <section class="welcome-section">
+      <span class="welcome-label">مرحباً بك في ARABAZON</span>
+
+      <h1>مرحباً بعودتك</h1>
+
+      <p>
+        سجّل الدخول للوصول إلى متاجرك المفضلة
+        والاستمتاع بتجربة تسوق متكاملة.
+      </p>
+    </section>
+
+    <!-- Login Card -->
+    <section class="login-card">
+
+      <div class="card-heading">
+        <h2>تسجيل الدخول</h2>
+        <p>أدخل بيانات حسابك للمتابعة</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+
+        <!-- Email / Phone -->
+        <div class="form-group">
+
+          <label for="login-identifier">
+            البريد الإلكتروني أو رقم الهاتف
+          </label>
+
+          <ion-item class="input-item" lines="none">
+
+            <ion-icon name="person-outline" slot="start">
+            </ion-icon>
+
+            <ion-input id="login-identifier" type="text" formControlName="identifier"
+              placeholder="أدخل البريد أو رقم الهاتف" autocomplete="username">
+            </ion-input>
+
+          </ion-item>
+
+          <small class="error-message" *ngIf="identifierControl?.touched &&
+                   identifierControl?.hasError('required')">
+            يرجى إدخال البريد الإلكتروني أو رقم الهاتف
+          </small>
+
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+
+          <label for="login-password">
+            كلمة المرور
+          </label>
+
+          <ion-item class="input-item" lines="none">
+
+            <ion-icon name="lock-closed-outline" slot="start">
+            </ion-icon>
+
+            <ion-input id="login-password" [type]="passwordVisible ? 'text' : 'password'" formControlName="password"
+              placeholder="أدخل كلمة المرور" autocomplete="current-password">
+            </ion-input>
+
+            <ion-button fill="clear" type="button" slot="end" class="password-toggle"
+              (click)="togglePasswordVisibility()">
+
+              <ion-icon [name]="passwordVisible
+                  ? 'eye-off-outline'
+                  : 'eye-outline'">
+              </ion-icon>
+
+            </ion-button>
+
+          </ion-item>
+
+          <small class="error-message" *ngIf="passwordControl?.touched &&
+                   passwordControl?.hasError('required')">
+            يرجى إدخال كلمة المرور
+          </small>
+
+        </div>
+
+        <!-- Remember / Forgot -->
+        <div class="form-options">
+
+          <label class="remember-option">
+            <input type="checkbox" formControlName="rememberMe">
+
+            <span>تذكرني</span>
+          </label>
+
+          <button type="button" class="text-link" (click)="onForgotPassword()">
+            نسيت كلمة المرور؟
+          </button>
+
+        </div>
+
+        <!-- Submit -->
+        <ion-button expand="block" type="submit" class="login-button" [disabled]="loginForm.invalid">
+
+          تسجيل الدخول
+
+          <ion-icon slot="start" name="arrow-forward-outline">
+          </ion-icon>
+
+        </ion-button>
+
+      </form>
+
+      <!-- Register -->
+      <div class="register-section">
+        <span>ليس لديك حساب؟</span>
+
+        <button type="button" class="register-link" (click)="goToRegister()">
+          إنشاء حساب جديد
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="login-footer">
+      <div class="footer-line"></div>
+
+      <p>ARABAZON</p>
+      <span>Multi Vendor Marketplace</span>
+    </footer>
+
+  </main>
+
+</ion-content>
